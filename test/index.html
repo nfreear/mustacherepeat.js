@@ -1,0 +1,74 @@
+<!doctype html><html ><title>*Test : mustache.js + mustacherepeat.js</title>
+
+<style>body,input,button{font:1em sans-serif; color:#333;} body{background:#fcfcfc; margin:2em;} table{margin:1em 0; border:1px solid #ccc;}</style>
+
+
+<h1>Test : mustache.js + mustacherepeat.js</h1>
+
+
+<!-- Create your template (Note the type="text/html") -->
+
+<script type="text/html" id="template">
+    <tr id="row-{{ idx }}">
+      <td><input type='text' name='row{{ idx }}.notes' placeholder='Notes..' /></td>
+      <td><input type='number' name='row{{ idx }}.hours' placeholder="0" min="0" max="60" step="5" /></td>
+      <td><button id="mr-del-{{ idx }}" type="button" onclick="{{ deleteCmd }}">{{ deleteText }}</button></td>
+    </tr>
+</script>
+
+
+
+<!-- Create a target -->
+
+<form>
+  <table>
+  <thead>
+    <tr>
+      <th>Notes</th> <th>Hours</th>
+    </tr>
+  </thead>
+  <tbody id="target">
+  </tbody>
+  </table>
+
+  <p><button type=button id="addBtn">Add row</button>
+  <p><button type=submit >Submit</button>
+</form>
+
+
+<!-- Include mustache.js and mustacherepeat.js -->
+
+<script src="//cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js"></script>
+<script src="../mustacherepeat.js"></script>
+
+
+
+<script>
+var mr = MustacheRepeat({
+  onadd: function (i, op, ev) { console.log('Add '+ i, op, ev) },
+  ondelete: function(i, op, ev) { console.log('Remove '+ i) }
+});
+
+/* var mr = MustacheRepeat({
+  template: '#template',
+  target: '#target',
+  //start: 3,
+  min: 1,
+  max: 6,
+  data: {}
+}); */
+console.log(mr);
+</script>
+
+
+
+<pre>
+
+
+Nick Freear, 22 March 2013.
+
+ * https://gist.github.com/nfreear/5223248
+ * http://jsdelivr.com/#!mustache
+
+</pre>
+</html>
