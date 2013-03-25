@@ -9,6 +9,13 @@
 var MustacheRepeat = function (op) {
   "use strict";
 
+  var exports = {
+    options: op,
+
+    add: add,
+    rem: _delete
+  };
+
   op = op || {};
   op.compiler = op.compiler || Mustache;
   op.template = op.template || '#template'; // TODO: A selector, or a template string.
@@ -34,11 +41,11 @@ var MustacheRepeat = function (op) {
     template = temp_elem ? temp_elem.innerHTML : op.template,
     compiledTemp = op.compiler.compile(template),
     target = select(op.target),
-    j,
+    j;
 
     // TODO - handle errors?
 
-    _delete = function (ev, i) {
+    function _delete(ev, i) {
       var del = op.predelete(i, op, ev),
         child;
       if (!del) {
@@ -46,13 +53,15 @@ var MustacheRepeat = function (op) {
         return del;
       }
 
-      if (i >= op.min) {
+      if (target.children.length > op.min) {
         child = target.removeChild(select('#' + op.rowid + i));
+        updateDeletes();
       }
 
       op.ondelete(i, op, ev);
-    },
-    add = function (ev) {
+    }
+
+    function add(ev) {
       if (idx >= op.max) {
         return;
       }
@@ -66,18 +75,30 @@ var MustacheRepeat = function (op) {
         target.innerHTML += html;
       }
 
-      // Bug in onclick assign?
-      (function (i) {
-        var btn = select('#' + op.deleteid + i);
-        if (btn) {
-          btn.onclick = function (ev) { _delete(ev, i); };
-        }
-      })(idx);
+      updateDeletes();
 
       op.onadd(idx, op, ev);
 
       idx++;
-    };
+    }
+
+    function updateDeletes() {
+      var child,
+        c,
+        m,
+        ti = null;
+      for (c in target.children) {
+        child = target.children[c];
+        m = child.id ? child.id.match(/(\d+)/) : null;
+        if (m) {
+          (function (ti) {
+          select('#' + op.deleteid + ti).onclick = function (ev) {
+            _delete(ev, ti);
+          }
+          })(m[0]);
+        }
+      }
+    }
 
   // Initialize!
   for (j = 0; j < op.start; j++) {
@@ -85,11 +106,5 @@ var MustacheRepeat = function (op) {
   }
   select(op.addBtn).onclick = function (ev) { add(ev); };
 
-  return {
-    options: op,
-
-    // Public methods.
-    add: add,
-    _delete: _delete
-  };
+  return exports;
 };
