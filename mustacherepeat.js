@@ -4,7 +4,7 @@
 */
 
 /*jslint nomen: true, plusplus: true, todo: true, white: true, indent: 2 */
-/* global Mustache document */
+/*global Mustache, document, $ */
 
 var MustacheRepeat = function (op) {
   "use strict";
@@ -30,8 +30,8 @@ var MustacheRepeat = function (op) {
     select = function (sel) {
       return document.querySelector(sel);
     },
-    temp_elem = select(op.template),
-    template = temp_elem ? temp_elem.innerHTML : null,
+    temp_elem = op.template.match(/^\s?[#.][a-zA-Z]/) ? select(op.template) : null,
+    template = temp_elem ? temp_elem.innerHTML : op.template,
     compiledTemp = op.compiler.compile(template),
     target = select(op.target),
     j,
@@ -57,10 +57,10 @@ var MustacheRepeat = function (op) {
         return;
       }
       var html = compiledTemp({
-        idx: idx, data: op.data, deleteText: op.deleteText, rowid: op.rowid, deleteid: op.deleteid });
+        idx: idx, data: op.data, deleteText: op.deleteText, rowid: op.rowid + idx, deleteid: op.deleteid + idx });
       //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
       //TODO: revisit.
-      if (typeof $ == 'function') {
+      if (typeof $ === 'function') {
         $(op.target).append(html);
       } else {
         target.innerHTML += html;

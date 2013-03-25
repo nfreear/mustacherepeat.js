@@ -9,10 +9,10 @@
 <!-- Create your template (Note the type="text/html") -->
 
 <script type="text/html" id="template">
-    <tr id="{{ rowid }}{{ idx }}">
+    <tr id="{{ rowid }}">
       <td><input type='text' name='row{{ idx }}.notes' placeholder='Notes..' /></td>
       <td><input type='number' name='row{{ idx }}.hours' placeholder="0" min="0" max="60" step="5" /></td>
-      <td><button id="{{ deleteid }}{{ idx }}" type="button">{{ deleteText }}</button></td>
+      <td><button id="{{ deleteid }}" type="button">{{ deleteText }}</button></td>
     </tr>
 </script>
 
@@ -38,16 +38,15 @@
 
 
 <!--
-  Internet Explorer requires an implementation of $(target).html(html),
-  for example, Ender/jseeh, Zotero or jQuery.
-  http://ericvasilik.com/2006/07/code-karma.html
+  Internet Explorer requires an implementation of `$(target).html(html)`.
+  For example, Ender/jseeh, Zotero or jQuery. (Why? http://ericvasilik.com/2006/07/code-karma.html)
 -->
 <!--[if IE]>
 <script src="http://cdn.enderjs.com/jeesh.min.js"></script>
 <![endif]-->
 
 
-<!-- Include mustache.js and mustacherepeat.js -->
+<!-- Include:  mustache.js + mustacherepeat.js -->
 
 <script src="http://cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js"></script>
 <script src="../mustacherepeat.js"></script>
@@ -84,6 +83,7 @@ Nick Freear, 22 March 2013.
 
  * https://gist.github.com/nfreear/5223248
  * http://jsdelivr.com/#!mustache
+ * http://cdnjs.com/#!mustache
 
 </pre>
 </html>
