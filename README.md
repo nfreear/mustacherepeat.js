@@ -1,15 +1,21 @@
-mustacherepeat.js
+{{ mustacherepeat.js }}
 =================
 
-Easy dynamically repeating templates with Mustache.
-
-Inspired by `repeat=template` from [Web Forms 2][wf2].
+Simple dynamically repeat {{mustache}} templates with Javascript.
 
 Example:
 
- * click the button to a add a row to the table.
+ * Click the HTML button to add a row to the table.
 
-== Links ==
+Inspired by `repeat=template` from [Web Forms 2][wf2].
+
+
+## Dependencies
+
+ * mustache.js: <https://github.com/janl/mustache.js>
+ * For Internet Explorer: Ender/jeesh, Zotero or jQuery - implementing `$(selector).html(html)`
+
+## Links
 
  * Test: <http://iet-embed-acct.open.ac.uk/dev/mustacherepeat.js/test>
  * Code: <https://github.com/nfreear/mustacherepeat.js>

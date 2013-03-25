@@ -1,6 +1,6 @@
-/*
- mustacherepeat.js : Mustache Template Repeater.
- Copyright 2013 Nick Freear.
+/*!
+ mustacherepeat.js - Dynamically repeat {{mustache}} templates with Javascript
+ https://github.com/nfreear/mustacherepeat.js
 */
 
 /*jslint nomen: true, plusplus: true, todo: true, white: true, indent: 2 */
@@ -11,9 +11,11 @@ var MustacheRepeat = function (op) {
 
   op = op || {};
   op.compiler = op.compiler || Mustache;
-  op.template = op.template || '#template';
+  op.template = op.template || '#template'; // TODO: A selector, or a template string.
   op.target = op.target || '#target';
   op.addBtn = op.addBtn || '#addBtn';
+  op.rowid = op.rowid || 'mrRow-';
+  op.deleteid = op.deleteid || 'mrDelete-';
   op.start = parseInt(op.start) || 1;
   op.min = parseInt(op.min) || 1;
   op.max = parseInt(op.max) || 10;
@@ -37,13 +39,16 @@ var MustacheRepeat = function (op) {
     // TODO - handle errors?
 
     _delete = function (ev, i) {
-      var del = op.predelete(i, op, ev);
+      var del = op.predelete(i, op, ev),
+        child;
       if (!del) {
         console.log('No delete');
         return del;
       }
 
-      // TODO: implement.
+      if (i >= op.min) {
+        child = target.removeChild(select('#' + op.rowid + i));
+      }
 
       op.ondelete(i, op, ev);
     },
@@ -52,7 +57,7 @@ var MustacheRepeat = function (op) {
         return;
       }
       var html = compiledTemp({
-        idx: idx, data: op.data, deleteText: op.deleteText, _deleteCmd: "mr.delete("+ idx +")" });
+        idx: idx, data: op.data, deleteText: op.deleteText, rowid: op.rowid, deleteid: op.deleteid });
       //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
       //TODO: revisit.
       if (typeof $ == 'function') {
@@ -60,9 +65,10 @@ var MustacheRepeat = function (op) {
       } else {
         target.innerHTML += html;
       }
+
       // Bug in onclick assign?
       (function (i) {
-        select('#mr-del-' + i).onclick = function (ev) { _delete(ev, i); };
+        select('#' + op.deleteid + i).onclick = function (ev) { _delete(ev, i); };
       })(idx);
 
       op.onadd(idx, op, ev);

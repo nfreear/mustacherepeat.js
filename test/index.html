@@ -9,10 +9,10 @@
 <!-- Create your template (Note the type="text/html") -->
 
 <script type="text/html" id="template">
-    <tr id="row-{{ idx }}">
+    <tr id="{{ rowid }}{{ idx }}">
       <td><input type='text' name='row{{ idx }}.notes' placeholder='Notes..' /></td>
       <td><input type='number' name='row{{ idx }}.hours' placeholder="0" min="0" max="60" step="5" /></td>
-      <td><button id="mr-del-{{ idx }}" type="button" onclick="{{ deleteCmd }}">{{ deleteText }}</button></td>
+      <td><button id="{{ deleteid }}{{ idx }}" type="button">{{ deleteText }}</button></td>
     </tr>
 </script>
 
@@ -59,6 +59,7 @@ var myLog = function (s) {
     if (typeof console == 'object') console.log(arguments.length > 1 ? arguments : s)
   },
   mr = MustacheRepeat({
+    //template: '<td><input /></td>',
     onadd: function (idx, opts, ev) { myLog('Add '+ idx, opts, ev) },
     ondelete: function(idx, opts, ev) { myLog('Remove '+ idx) }
   });
