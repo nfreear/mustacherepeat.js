@@ -37,6 +37,13 @@
 
 
 
+<hr /><!-- Target 2 -->
+
+<ul id="list" ></ul>
+<button id="listAdd" >Add item</button>
+
+
+
 <!--
   Internet Explorer requires an implementation of `$(target).html(html)`.
   For example, Ender/jseeh, Zotero or jQuery. (Why? http://ericvasilik.com/2006/07/code-karma.html)
@@ -61,6 +68,11 @@ var myLog = function (s) {
     //template: '<td><input /></td>',
     onadd: function (idx, opts, ev) { myLog('Add '+ idx, opts, ev) },
     ondelete: function(idx, opts, ev) { myLog('Remove '+ idx) }
+  }),
+  mr2 = MustacheRepeat({
+    template: '<li>Item {{ idx }}',
+    target: '#list',
+    addBtn: '#listAdd'
   });
 
 /* var mr = MustacheRepeat({

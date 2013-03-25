@@ -68,7 +68,10 @@ var MustacheRepeat = function (op) {
 
       // Bug in onclick assign?
       (function (i) {
-        select('#' + op.deleteid + i).onclick = function (ev) { _delete(ev, i); };
+        var btn = select('#' + op.deleteid + i);
+        if (btn) {
+          btn.onclick = function (ev) { _delete(ev, i); };
+        }
       })(idx);
 
       op.onadd(idx, op, ev);

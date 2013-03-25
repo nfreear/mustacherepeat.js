@@ -10,6 +10,29 @@ Example:
 Inspired by `repeat=template` from [Web Forms 2][wf2].
 
 
+## Usage
+
+    <ul id="list" ></ul>
+    <button id="listAdd" >Add item</button>
+
+
+    <!--[if IE]>
+      <script src="http://cdn.enderjs.com/jeesh.min.js"></script>
+    <![endif]-->
+
+    <script src="http://cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js"></script>
+    <script src="../mustacherepeat.js"></script>
+
+
+    <script>
+      MustacheRepeat({
+        template: '<li>Item {{ idx }}',
+        target: '#list',
+        addBtn: '#listAdd'
+      });
+    </script>
+
+
 ## Dependencies
 
  * mustache.js: <https://github.com/janl/mustache.js>
