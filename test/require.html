@@ -1,0 +1,83 @@
+<!doctype html><html ><title>*Require test : mustache.js + mustacherepeat.js</title>
+
+<style>body,input,button{font:1em sans-serif; color:#333;} body{background:#fcfcfc; margin:2em;} table{margin:1em 0; border:1px solid #ccc;}</style>
+
+<h1>Require test : mustache.js + mustacherepeat.js</h1>
+
+
+
+<!-- Create a target -->
+
+<form>
+  <table>
+  <thead>
+    <tr>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody id="target">
+  </tbody>
+  </table>
+
+  <p><button type=button id="addBtn">Add row</button>
+  <p><button type=submit >Submit</button>
+</form>
+
+
+
+<!--
+  Internet Explorer requires an implementation of `$(target).html(html)`.
+  For example, Ender/jseeh, Zotero or jQuery. (Why? http://ericvasilik.com/2006/07/code-karma.html)
+-->
+<!--[if IE]>
+<script src="http://cdn.enderjs.com/jeesh.min.js"></script>
+<![endif]-->
+
+
+
+<!-- Include:  RequireJS, require-text, mustache.js, mustacherepeat.js + 'table-template.mustache' -->
+
+<script src="http://cdn.jsdelivr.net/requirejs/2.1.4/require.js"></script>
+<script>
+require({
+  paths: {
+    text: "http://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text" //Minus ".js"
+  }
+});
+require([
+  "http://cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js",
+  "../mustacherepeat.js",
+  "text!table-template.mustache"
+],
+function (Mustache, notMR, template) {
+  var myLog = function (s) {
+      if (typeof console == 'object') console.log(arguments.length > 1 ? arguments : s)
+    },
+    fn = Mustache.compile(template), //"<td>{{ myvar }}</td>"),
+      html = fn({ rowid: "My-value" });
+  myLog(html, notMR);
+
+  mr = MustacheRepeat({
+    compiler: Mustache,
+    template: template,
+    onadd: function (idx, options, ev) {
+      myLog(options);
+    }
+  });
+
+  myLog(mr);
+});
+</script>
+
+
+
+<pre>
+
+
+Nick Freear, 25 March 2013.
+
+ * http://jsdelivr.com/#!require
+ * http://cdnjs.com/#!require
+
+</pre>
+</html>

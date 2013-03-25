@@ -1,9 +1,9 @@
 {{ mustacherepeat.js }}
 =================
 
-Simple dynamically repeat {{mustache}} templates with Javascript.
+Dynamically repeat {{mustache}} templates with Javascript.
 
-Example:
+For example:
 
  * Click the HTML button to add a row to the table.
 
@@ -31,7 +31,6 @@ Inspired by `repeat=template` from [Web Forms 2][wf2].
         addBtn: '#listAdd'
       });
     </script>
-
 
 ## Dependencies
 
