@@ -43,7 +43,7 @@ var MustacheRepeat = function (op) {
         return del;
       }
 
-      // TODO.
+      // TODO: implement.
 
       op.ondelete(i, op, ev);
     },
@@ -51,8 +51,15 @@ var MustacheRepeat = function (op) {
       if (idx >= op.max) {
         return;
       }
-      target.innerHTML += compiledTemp({
+      var html = compiledTemp({
         idx: idx, data: op.data, deleteText: op.deleteText, _deleteCmd: "mr.delete("+ idx +")" });
+      //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
+      //TODO: revisit.
+      if (typeof $ == 'function') {
+        $(op.target).append(html);
+      } else {
+        target.innerHTML += html;
+      }
       // Bug in onclick assign?
       (function (i) {
         select('#mr-del-' + i).onclick = function (ev) { _delete(ev, i); };

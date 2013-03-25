@@ -36,28 +36,42 @@
 </form>
 
 
+
+<!--
+  Internet Explorer requires an implementation of $(target).html(html),
+  for example, Ender/jseeh, Zotero or jQuery.
+  http://ericvasilik.com/2006/07/code-karma.html
+-->
+<!--[if IE]>
+<script src="http://cdn.enderjs.com/jeesh.min.js"></script>
+<![endif]-->
+
+
 <!-- Include mustache.js and mustacherepeat.js -->
 
-<script src="//cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js"></script>
+<script src="http://cdn.jsdelivr.net/mustache.js/0.7.2/mustache.js"></script>
 <script src="../mustacherepeat.js"></script>
 
 
 
 <script>
-var mr = MustacheRepeat({
-  onadd: function (i, op, ev) { console.log('Add '+ i, op, ev) },
-  ondelete: function(i, op, ev) { console.log('Remove '+ i) }
-});
+var myLog = function (s) {
+    if (typeof console == 'object') console.log(arguments.length > 1 ? arguments : s)
+  },
+  mr = MustacheRepeat({
+    onadd: function (idx, opts, ev) { myLog('Add '+ idx, opts, ev) },
+    ondelete: function(idx, opts, ev) { myLog('Remove '+ idx) }
+  });
 
 /* var mr = MustacheRepeat({
   template: '#template',
   target: '#target',
-  //start: 3,
+  start: 3,
   min: 1,
   max: 6,
   data: {}
 }); */
-console.log(mr);
+myLog(mr);
 </script>
 
 
