@@ -30,7 +30,7 @@ var MustacheRepeat = function (op) {
   op.ondelete = op.ondelete || function () {};
   op.predelete = op.predelete || function () { return true; };
   op.deleteText = op.deleteText || "Remove";
-  op.data = op.data || {};
+  op.data = op.data || [];
 
   var idx = 0,
     //self = this,
@@ -66,12 +66,13 @@ var MustacheRepeat = function (op) {
         return;
       }
       var html = compiledTemp({
-        idx: idx, data: op.data, deleteText: op.deleteText, rowid: op.rowid + idx, deleteid: op.deleteid + idx });
+        idx: idx, data: op.data[idx], deleteText: op.deleteText, rowid: op.rowid + idx, deleteid: op.deleteid + idx });
       //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
       //TODO: revisit.
       if (typeof $ === 'function') {
         $(op.target).append(html);
       } else {
+        //target.appendChild(html);
         target.innerHTML += html;
       }
 

@@ -1,7 +1,6 @@
 <!doctype html><html ><title>*Test : mustache.js + mustacherepeat.js</title>
 
-<style>body,input,button{font:1em sans-serif; color:#333;} body{background:#fcfcfc; margin:2em;} table{margin:1em 0; border:1px solid #ccc;}</style>
-
+<link rel="stylesheet" href="test.css" />
 
 <h1>Test : mustache.js + mustacherepeat.js</h1>
 
@@ -48,9 +47,9 @@
   Internet Explorer requires an implementation of `$(target).html(html)`.
   For example, Ender/jseeh, Zotero or jQuery. (Why? http://ericvasilik.com/2006/07/code-karma.html)
 -->
-<!--[if IE]>
+<!--[if IE]-->
 <script src="http://cdn.enderjs.com/jeesh.min.js"></script>
-<![endif]-->
+<!--[endif]-->
 
 
 <!-- Include:  mustache.js + mustacherepeat.js -->
@@ -70,9 +69,10 @@ var myLog = function (s) {
     ondelete: function(idx, opts, ev) { myLog('Remove '+ idx) }
   }),
   mr2 = MustacheRepeat({
-    template: '<li>Item {{ idx }}',
+    template: '<li>Item {{ idx }} &ndash; {{ data.name }}',
     target: '#list',
-    addBtn: '#listAdd'
+    addBtn: '#listAdd',
+    data: [{ name:"Jane" }, { name:"Bob" }, { name:"Sue" }, { name:"Matt" }]
   });
 
 /* var mr = MustacheRepeat({
@@ -98,4 +98,6 @@ Nick Freear, 22 March 2013.
  * http://cdnjs.com/#!mustache
 
 </pre>
+<a href="https://github.com/nfreear/mustacherepeat.js"
+  class="g" title="Fork me on Github"></a>
 </html>
