@@ -1,0 +1,25 @@
+{
+  "name": "mustacherepeat.js",
+  "version": "0.1.0",
+  "description": "Dynamically repeat {{mustache}} templates with Javascript.",
+  "main": "mustacherepeat.js",
+  "dependencies": {
+    "mustache": "*"
+  },
+  "devDependencies": {
+    "jquery": "*",
+    "grunt": "*",
+    "grunt-contrib-jshint": "*"
+  },
+  "scripts": { "test": "" },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nfreear/mustacherepeat.js.git"
+  },
+  "keywords": [ "mustache", "template", "browser" ],
+  "author": "Nick Freear <nfreear@yahoo.co.uk> (https://github.com/nfreear)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "bugs": { "url": "https://github.com/nfreear/mustacherepeat.js/issues" },
+  "browser": { "xmlhttprequest": false }
+}

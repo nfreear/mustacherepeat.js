@@ -1,7 +1,6 @@
-{{ mustacherepeat.js }}
-=================
+# {{ mustacherepeat.js }}
 
-Dynamically repeat {{mustache}} templates with Javascript.
+Dynamically repeat [{{mustache}}][] templates with Javascript.
 
 For example:
 
@@ -12,6 +11,7 @@ Inspired by `repeat=template` from [Web Forms 2][wf2].
 
 ## Usage
 
+```html
     <ul id="list" ></ul>
     <button id="listAdd" >Add item</button>
 
@@ -31,20 +31,29 @@ Inspired by `repeat=template` from [Web Forms 2][wf2].
         addBtn: '#listAdd'
       });
     </script>
+```
 
 ## Dependencies
 
- * mustache.js: <https://github.com/janl/mustache.js>
+ * mustache.js: [@janl/mustache.js][]
  * For Internet Explorer: Ender/jeesh, Zotero or jQuery - implementing `$(selector).html(html)`
 
 ## Links
 
  * Test: <http://iet-embed-acct.open.ac.uk/dev/mustacherepeat.js/test>
- * Code: <https://github.com/nfreear/mustacherepeat.js>
+ * Code: [@nfreear/mustacherepeat.js][]
 
 
-Copyright 2013 [Nick Freear][copy].
+## License
 
-[copy]: http://nfreear.mit-license.org/
+©2013 [Nick Freear][]. License: [MIT][].
+
+
+[{{mustache}}]: https://github.com/janl/mustache.js
+[@janl/mustache.js]: https://github.com/janl/mustache.js
+[@nfreear/mustacherepeat.js]: https://github.com/nfreear/mustacherepeat.js
+[test]: http://iet-embed-acct.open.ac.uk/dev/mustacherepeat.js/test/
+[Nick Freear]:  http://twitter.com/nfreear
+[MIT]:  http://nfreear.mit-license.org/
 [wf2]: http://whatwg.org/specs/web-forms/current-work/#repeatingFormControls
 

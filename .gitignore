@@ -1,0 +1,13 @@
+#.gitignore
+
+logs
+*.log
+.DS_Store
+*copy
+*.diff
+node_modules/
+
+#test/calc.html
+
+
+#End.
