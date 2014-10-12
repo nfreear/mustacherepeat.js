@@ -39,9 +39,11 @@ var MustacheRepeat = function (op) {
     },
     temp_elem = op.template.match(/^\s?[#.][a-zA-Z]/) ? select(op.template) : null,
     template = temp_elem ? temp_elem.innerHTML : op.template,
-    compiledTemp = op.compiler.compile(template),
     target = select(op.target),
     j;
+
+  // Pre-parse (Mustache.compile() - no longer exists)
+  op.compiler.parse(template);
 
     // TODO - handle errors?
 
@@ -65,8 +67,13 @@ var MustacheRepeat = function (op) {
       if (idx >= op.max) {
         return;
       }
-      var html = compiledTemp({
-        idx: idx, data: op.data[idx], deleteText: op.deleteText, rowid: op.rowid + idx, deleteid: op.deleteid + idx });
+      var html = op.compiler.render(template, {
+        idx: idx,
+        data: op.data[idx],
+        deleteText: op.deleteText,
+        rowid: op.rowid + idx,
+        deleteid: op.deleteid + idx
+      });
       //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
       //TODO: revisit.
       if (typeof $ === 'function') {
