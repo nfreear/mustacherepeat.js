@@ -1,0 +1,94 @@
+<!doctype html><html ><title>*Test : mustache.js + mustacherepeat.js</title>
+
+<link rel="stylesheet" href="test.css" />
+
+<h1>Test : mustache.js + mustacherepeat.js</h1>
+
+
+<!-- Create your template -->
+
+<script id="template" type="x-tmpl-mustache">
+    <tr id="{{ rowid }}">
+      <td><input type='text' name='row{{ idx }}.notes' placeholder='Notes..' /></td>
+      <td><input type='number' name='row{{ idx }}.hours' placeholder="0" min="0" max="60" step="5" /></td>
+      <td><button id="{{ deleteid }}" type="button">{{ deleteText }}</button></td>
+    </tr>
+</script>
+
+
+
+<!-- Create a target -->
+
+<form>
+  <table>
+  <thead>
+    <tr>
+      <th>Notes</th> <th>Hours</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td><label for="sum">Total</label></td> <td><input id="sum" readonly /></td>
+    </tr>
+  </tfoot>
+  <tbody id="target">
+  </tbody>
+  </table>
+
+  <p><button type=button id="addBtn">Add row</button>
+  <p><button type=submit >Submit</button>
+</form>
+
+
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/mustache/mustache.js"></script>
+
+
+<script src="../mustacherepeat.js"></script>
+<script>
+var
+  mr = MustacheRepeat({
+    //template: '<td><input /></td>',
+    onadd: function (idx, opts, ev) { log('Add '+ idx, opts, ev) },
+    ondelete: function(idx, opts, ev) { log('Remove '+ idx) }
+  })
+  ;
+
+log(mr);
+
+
+function log(s) {
+  window.console && console.log(arguments.length > 1 ? arguments : s);
+}
+</script>
+
+
+
+<script>
+/*
+  Calculate a running total...
+*/
+$(function running_total() {
+  var
+    numbers_selector = "input[type = number]",
+    input_event = "input",
+    $target = $("#target"),
+    $total = $("#sum");
+
+  $target.on(input_event, function () {
+    var sum = 0;
+    $(numbers_selector, $target).each(function () {
+      sum += parseInt($(this).val()) || 0;
+    });
+    $total.val(sum);
+  });
+});
+</script>
+
+
+
+
+<a href="https://github.com/nfreear/mustacherepeat.js"
+  class="g" aria-label="Fork me on Github"></a>
+</html>

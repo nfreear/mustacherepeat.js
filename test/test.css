@@ -1,11 +1,14 @@
-/*
- mustacherepeat.js - Test styles.
+/*!
+  mustacherepeat.js - Test styles.
 */
 body {
  background:#fbfbfb; margin:2em;
 }
 body, input, button {
   font:1em sans-serif; color:#333;
+}
+input#sum {
+  max-width: 5em;
 }
 table { 
   margin:1em 0; border:1px solid #ccc;
