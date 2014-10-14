@@ -17,6 +17,7 @@ var MustacheRepeat = function (op) {
   };
 
   op = op || {};
+  op.$ = op.$ || window.$ || null;
   op.compiler = op.compiler || Mustache;
   op.template = op.template || '#template'; // TODO: A selector, or a template string.
   op.target = op.target || '#target';
@@ -50,6 +51,7 @@ var MustacheRepeat = function (op) {
     function _delete(ev, i) {
       var del = op.predelete(i, op, ev),
         child;
+
       if (!del) {
         console.log('No delete');
         return del;
@@ -61,6 +63,9 @@ var MustacheRepeat = function (op) {
       }
 
       op.ondelete(i, op, ev);
+
+      op.$ && op.$(op.target).trigger({
+        type: "delete.MustacheRepeat", idx: i, options: op });
     }
 
     function add(ev) {
@@ -76,7 +81,7 @@ var MustacheRepeat = function (op) {
       });
       //MSIE: can't assign to innerHTML within tables, http://ericvasilik.com/2006/07/code-karma.html
       //TODO: revisit.
-      if (typeof $ === 'function') {
+      if (typeof op.$ === 'function') {
         $(op.target).append(html);
       } else {
         //target.appendChild(html);

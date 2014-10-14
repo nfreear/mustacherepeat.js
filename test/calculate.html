@@ -49,6 +49,7 @@
 <script>
 var
   mr = MustacheRepeat({
+    $: $,
     //template: '<td><input /></td>',
     onadd: function (idx, opts, ev) { log('Add '+ idx, opts, ev) },
     ondelete: function(idx, opts, ev) { log('Remove '+ idx) }
@@ -69,19 +70,22 @@ function log(s) {
 /*
   Calculate a running total...
 */
-$(function running_total() {
+$(document).ready(function running_total() {
   var
     numbers_selector = "input[type = number]",
-    input_event = "input",
+    calculate_events = "input delete.MustacheRepeat",
     $target = $("#target"),
     $total = $("#sum");
 
-  $target.on(input_event, function () {
+  log("Running total..", $total);
+
+  $target.on(calculate_events, function (ev) {
     var sum = 0;
     $(numbers_selector, $target).each(function () {
       sum += parseInt($(this).val()) || 0;
     });
     $total.val(sum);
+    log("Calculate", sum, ev);
   });
 });
 </script>
